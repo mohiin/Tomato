@@ -1,4 +1,4 @@
 
-const frontendUrl = "http://localhost:8080";
+const frontendUrl = "https://tomato-mh.onrender.com/";
 
 export {frontendUrl};
