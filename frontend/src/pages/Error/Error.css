@@ -1,0 +1,11 @@
+
+.error{
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error h2{
+    color: #e43b12;
+}

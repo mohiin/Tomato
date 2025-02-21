@@ -1,0 +1,46 @@
+
+.food-display{
+    margin-top: 2rem;
+    min-height: 40vh;
+}
+
+.food-display h2{
+    font-size: max(2vw, 24px);
+}
+
+.food-display-list{
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    row-gap: 20px;
+    column-gap: 10px;
+}
+
+.food-display-list-item{
+    padding: 1rem;
+    border-radius: 20px;
+}
+.food-display-list-item img{
+    width: 280px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.food-display-list-item-info{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.food-display-list-item p{
+    color: #000;
+}
+
+.food-display-list-item .item-price{
+    color: #e43b12;
+    font-weight: 700;
+}
+
+.food-display-list-item:hover{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}

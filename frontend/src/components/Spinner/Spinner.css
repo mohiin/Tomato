@@ -1,0 +1,21 @@
+
+.spinner-container{
+    width: 100%;
+    height: 50vh;
+    display: grid;
+}
+.spinner{
+    width: 100px;
+    height: 100px;
+    place-self: center;
+    border-radius: 50%;
+    border: 5px solid #bdbdbd;
+    border-top-color: #e43b12;
+    animation: rotate 1s infinite;
+}
+
+@keyframes rotate {
+    100%{
+        transform: rotate(360deg);
+    }
+}

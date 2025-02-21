@@ -1,0 +1,36 @@
+
+.list-table-format{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr;
+    border: 1px solid #fff;
+    padding: 0.8rem;
+    column-gap: 10px;
+    text-align: center;
+    align-items: center;
+}
+
+.list-table-format img{
+    width: 50px;
+}
+
+.list-table-format button{
+    background-color:#555; 
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 0;
+}
+
+.cross{
+    cursor: pointer;
+    text-align: center;
+}
+
+@media (max-width: 750px) {
+    .title{
+        display: none;
+    }
+    .list-table-format{
+        grid-template-columns: 2fr 2fr 1fr;
+    }
+}

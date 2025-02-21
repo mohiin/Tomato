@@ -1,0 +1,160 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    gap:10px;
+    align-items: center;
+    padding: 1rem 10%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #ebe9e1;
+}
+
+.navbar .brand p{
+    font-size: 32px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.navbar .nav-search{
+    flex:1;
+    display: flex;
+    align-items: center;
+    gap:5px;
+    padding:0.3rem 0.5rem;
+    border-radius:20px;
+    border: 1px solid #e43b12;
+}
+
+.nav-search p{
+    width: 15px;
+}
+
+.nav-search input{
+    width: 95%;
+    padding: 0.5rem;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+.nav-search input::placeholder{
+    color: #e43b12;
+}
+
+.navbar .bag{
+    position: relative;
+}
+
+.navbar .bag img{
+    cursor: pointer;
+}
+
+.navbar .bag .dot{
+    background-color: #fa8871;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 10px;
+    left: 11px;
+}
+
+.nav-button {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-button button{
+    padding: 0.8rem 1.3rem;
+    border-radius: 50px;
+    color: #e43b12;
+    font-weight: 700;
+    border: 1px solid #e43b12;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.nav-button .btn{
+    color: #fff;
+    background-color: #e43b12;
+   
+}
+.nav-button button:hover{
+    background-color: #e43b12;
+    color: #fff;
+}
+.nav-button .btn:hover{
+    background-color: #fff4f2;
+    color: #e43b12;
+}
+
+.nav-profile{
+    position: relative;
+}
+
+.nav-profile-dropdown{
+    position: absolute;
+    display: none;
+    right: 0;
+    z-index: 1;
+}
+.nav-profile:hover .nav-profile-dropdown{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #fff2ef;
+    padding: 12px 25px;
+    border: 1px solid tomato;
+    outline: 2px solid #fff;
+    list-style: none;
+}
+
+.nav-profile-dropdown li{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.nav-profile-dropdown li:hover{
+    color: tomato
+}
+
+.nav-toggle{
+    display: none;
+}
+.nav-toggle p i{
+    font-size: 28px;
+    cursor: pointer;
+}
+
+@media (max-width: 770px) {
+    .navbar .brand p{
+        font-size: 28px;
+    }
+    .nav-button{
+        display: none;
+    }
+    .nav-toggle{
+        display: block;
+    }
+    .nav-button.active {
+        display: flex;
+        flex-direction:  column;
+        background-color: #ebe9e1;
+        position: absolute;
+        top: 75px;
+        left: 0;
+        height: 100vh;
+        width: 100%;
+        padding: 1rem 10%;
+    }
+
+    .nav-button.active button{
+        display: block;
+    }
+
+    
+}
+
+

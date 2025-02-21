@@ -1,0 +1,116 @@
+
+.cart{
+    margin-top: 80px;
+    min-height: 30vh;
+    color: #000;
+}
+
+.cart-items-title, .cart-items-item{
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 0.5fr;
+    align-items: center;
+    color: gray;
+    font-size: max(1vw, 12px);
+    margin: 10px 0;
+}
+.cart-items-item{
+    color: #000;
+}
+
+.cart hr{
+    height: 1px;
+    background-color: #fff;
+    border: none;
+}
+
+.cart-items-item{
+    margin: 10px 0;
+}
+
+.cart-items-item img{
+    width: 50px;
+}
+
+.cart-items-item .cross{
+    cursor: pointer;
+}
+
+.cart-bottom{
+    margin: 80px 0;;
+    display: flex;
+    justify-content: space-between;
+    gap: max(12vw, 20px);
+}
+
+.cart-bottom .cart-total {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;   
+}
+
+.cart-total .cart-total-details{
+    display: flex;
+    justify-content: space-between;
+    color: #555;
+}
+.cart-total button{
+    background-color: #e43b12;
+    color: #fff;
+    width: max(15vw, 200px);
+    padding: 0.8rem 0;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    
+}
+
+.cart-total button:disabled {
+    background-color: #555; /* Darken the button when disabled */
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+.cart-bottom .promo-code{
+    flex: 1;
+}
+
+.promo-code p{
+    color: #555;
+}
+
+.promo-code .promo-code-input{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.promo-code-input input{
+    flex: 1;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    padding: 12px 5px;
+}
+
+.promo-code-input button{
+    background-color: #000;
+    color: #fff;
+    border: none;
+    outline: none;
+    width: max(12vw, 150px);
+    padding: 0.8rem 0.4rem;
+    border-radius: 0 4px 4px 0;
+}
+
+@media (max-width:750px) {
+    .cart-items-item img{
+        width: 30px;
+    }
+    .cart-bottom{
+        flex-direction: column-reverse;
+    }
+}
