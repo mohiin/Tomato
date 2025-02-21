@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux"
 import axios from "axios";
 import { toast } from "react-toastify";
+import { backendUrl } from "../../config/config";
 import "./PlaceOrder.css";
 
 
@@ -11,7 +12,7 @@ export default function PlaceOrder() {
     const user = useSelector((state) => state.user.user);
     const cartData = useSelector((state) => state.cart.cartData) || []; // Cart data from Redux
     const totalAmount = useSelector((state) => state.cart.totalAmount);
-    const url = "http://localhost:3000";
+  
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -47,7 +48,7 @@ export default function PlaceOrder() {
             amount: totalAmount + 2,
         }
 
-        let res = await axios.post(url+"/order/place", orderData, {});
+        let res = await axios.post(`${backendUrl}/order/place`, orderData, {});
         if(res.data.success){
             const { session_url } = res.data;
             window.location.replace(session_url);
