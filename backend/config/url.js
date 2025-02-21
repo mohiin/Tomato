@@ -1,4 +1,4 @@
 
-const frontendUrl = "https://tomato-mh.onrender.com/";
+const frontendUrl = "https://tomato-mh.onrender.com";
 
 export {frontendUrl};
