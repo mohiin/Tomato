@@ -11,17 +11,20 @@ const formSlice = createSlice({
     initialState,
     reducers: {
         openLoginForm: (state) => {
-            state.isOpenLogin = !state.isOpenLogin;
+            state.isOpenLogin = true;  
             state.isOpenSignup = false;
         },
-        
-        openSignupForm: (state)=>{
-            state.isOpenSignup = !state.isOpenSignup;
-            state.isOpenLogin = false; // Close login form when signup form opens
+        openSignupForm: (state) => {
+            state.isOpenSignup = true; 
+            state.isOpenLogin = false;
         },
+        closeForms: (state) => {
+            state.isOpenLogin = false;
+            state.isOpenSignup = false;
+        }
     
     }
 })
 
-export const { openSignupForm, openLoginForm } = formSlice.actions;
+export const { openSignupForm, openLoginForm, closeForms } = formSlice.actions;
 export default formSlice.reducer;

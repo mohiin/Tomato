@@ -16,8 +16,18 @@ import List from "./admin/List/List";
 import Update from "./admin/Update/Update";
 import Login from "./components/Login/Login";
 import Orders from "./admin/Orders/Orders";
+import { useEffect } from "react";
+import { getUser } from "./redux/userSlice";
+import { useDispatch } from "react-redux";
 
 export default function App() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUser()); // Fetch user on page load
+  }, [dispatch]);
+
 
   return (
     <>

@@ -1,14 +1,27 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { signupAPI, loginAPI, logoutAPI } from "./userAPI";
+import { signupAPI, loginAPI, logoutAPI, getUserAPI } from "./userAPI";
 
+
+export const getUser = createAsyncThunk("user/getUser", async (_, { rejectWithValue }) => {
+    try {
+        const response = await getUserAPI(); 
+        return response.user;
+    } catch (error) {
+        console.log("Error fetching user:", error); 
+        return rejectWithValue(error.response?.data?.message || "Error fetching user");
+    }
+});
 
 // Async action to sign up the user
 export const signupUser = createAsyncThunk(
     "user/signupUser",
 
-    async (userData) => {
+    async (userData, { dispatch }) => {
         try {
             const data = await signupAPI(userData);
+            if (data.success) {
+                await dispatch(getUser());
+            }
             return data;
         } catch (error) {
             return "Signup failed due to server error";
@@ -20,9 +33,12 @@ export const signupUser = createAsyncThunk(
 // Async action to log in the user
 export const loginUser = createAsyncThunk(
     "user/loginUser",
-    async (credentials) => {
+    async (credentials, { dispatch }) => {
         try {
             const data = await loginAPI(credentials);
+            if (data.success) {
+                await dispatch(getUser());
+            }
             return data;
         } catch (error) {
             return "Login failed due to server error";
@@ -37,7 +53,7 @@ export const logoutUser = createAsyncThunk(
         try {
             const data = await logoutAPI();
             if (data.success) {
-                return null; // Return null to clear the user state on successful logout
+                return null;
             }
         } catch (error) {
             return "Logout failed due to server error";
@@ -46,7 +62,7 @@ export const logoutUser = createAsyncThunk(
 );
 
 const initialState = {
-    user: JSON.parse(window.localStorage.getItem("user")) || null ,
+    user: null,
     status: "idle",
     isLoading: false,
     error: null,
@@ -59,15 +75,17 @@ const userSlice = createSlice({
 
     extraReducers: (builder) => {
         builder
+            .addCase(getUser.fulfilled, (state, action) => {
+                state.user = action.payload;
+                state.status = "succeeded";
+            })
+            .addCase(getUser.rejected, (state, action) => {
+                state.user = null;
+                state.status = "failed";
+                state.error = action.payload;
+            })
             .addCase(loginUser.pending, (state) => {
                 state.status = "loading";
-            })
-            .addCase(loginUser.fulfilled, (state, action) => {
-                state.status = "succeeded";
-                window.localStorage.setItem("user", JSON.stringify(action.payload.user));
-                state.user =  JSON.parse(window.localStorage.getItem("user"));
-                state.message = action.payload.message;
-                
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.status = "failed";
@@ -77,21 +95,14 @@ const userSlice = createSlice({
             .addCase(signupUser.pending, (state) => {
                 state.status = "loading";
             })
-            .addCase(signupUser.fulfilled, (state, action) => {
-                state.status = "succeeded";
-                window.localStorage.setItem("user", JSON.stringify(action.payload.user));
-                state.user =  JSON.parse(window.localStorage.getItem("user"));
-                state.message = action.payload.message;
-            })
             .addCase(signupUser.rejected, (state, action) => {
                 state.status = "failed";
-                state.error = action.payload || "Signup failed"; // Error message from backend
+                state.error = action.payload || "Signup failed";
                 state.message = action.payload.message;
             })
             .addCase(logoutUser.fulfilled, (state) => {
                 state.status = "succeeded";
-                window.localStorage.removeItem("user");
-                state.user = null; // Clear user data
+                state.user = null; 
             });
     }
 

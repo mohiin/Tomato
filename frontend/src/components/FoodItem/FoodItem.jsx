@@ -35,7 +35,6 @@ export default function FoodItem({ item }) {
         <div key={item._id} className="food-item">
             <div className="food-item-img">
                 <img src={item.image} alt="" />
-                {/* <img src="/profile_bgg.jpg" alt="" /> */}
                 <img onClick={() => { handleAddToCart(item), handleImgClick() }} className="add-icon" src={imgClick} alt="" />
             </div>
             <div className="food-item-info">

@@ -1,8 +1,20 @@
 import { backendUrl } from "../config/config";
 
+export const getUserAPI = async () => {
+    const response = await fetch(`${backendUrl}/user/check-user`, { 
+        method: "GET",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    const data = await response.json();
+    return data;
+}
 export const signupAPI = async (userData) => {
     const response = await fetch(`${backendUrl}/user/signup`, {
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
         },
@@ -16,6 +28,7 @@ export const signupAPI = async (userData) => {
 export const loginAPI = async (credentials) => {
     const response = await fetch(`${backendUrl}/user/login`, {
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
         },
@@ -23,6 +36,7 @@ export const loginAPI = async (credentials) => {
     });
 
     const data = await response.json();
+    console.log("data ", data);
     return data;
 }
 

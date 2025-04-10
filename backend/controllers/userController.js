@@ -26,7 +26,7 @@ const signup = async (req, res) => {
         });
 
         await userModel.register(newUser, password);
-
+        req.session.user = { _id: newUser._id, username: newUser.username, cartData: newUser.cartData }; // Store user data in session
         // Redirect or send success response
         res.status(200).json({
             success: true, user: {
@@ -81,7 +81,13 @@ const login = async (req, res) => {
     }
 }
 
-
+const checkUser = (req, res) => {
+    if (req.session && req.session.user) {
+        res.json({ success: true, user: req.session.user });
+    } else {
+        res.json({ success: false, message: 'No session found' });
+    }
+};
 
 
 //logout the user
@@ -94,4 +100,4 @@ const logout = (req, res, next) => {
     })
 }
 
-export { signup, login, logout };
+export { signup, login, logout, checkUser };

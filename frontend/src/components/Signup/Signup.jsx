@@ -2,7 +2,7 @@
 import { useState } from "react";
 import "../Login/Login.css";
 import { useDispatch } from "react-redux";
-import { openLoginForm, openSignupForm } from "../../redux/formSlice";
+import { closeForms, openLoginForm, openSignupForm } from "../../redux/formSlice";
 import { signupUser } from "../../redux/userSlice";
 import { toast } from "react-toastify";
 
@@ -10,12 +10,7 @@ export default function Signup() {
 
     const dispatch = useDispatch();
 
-    const [loading, setLoading] = useState(false); // Track loading state
-
-
-    const handleShowSignupForm = () => {
-        dispatch(openSignupForm());
-    };
+    const [loading, setLoading] = useState(false);
 
     const handleShowLoginForm = () => {
         dispatch(openLoginForm());
@@ -44,29 +39,23 @@ export default function Signup() {
 
     const userData = formData;
 
-    const handleSignup = (e) => {
+    const handleSignup = async (e) => {
         e.preventDefault();
-        setLoading(true);
-        dispatch(signupUser(userData))
-            .then((result) => {
-                setLoading(false);
-                if (result.type === "user/signupUser/fulfilled") {
-                    if (result.payload.success) {
-                        toast.success(result.payload.message);
-                        dispatch(openSignupForm());
-                    } else {
-                        toast.error(result.payload.message);
-                    }
-                } else {
-                    console.log("Signup failed:", result.error.message);  // Handle error
-                    toast.error(result.error.message || "Signup failed!");
-                }
-            })
-            .catch((error) => {
-                setLoading(false);
-                console.log("Signup failed:", error.message);
-                toast.error(error.message || "Signup failed!");
-            });
+        try {
+            setLoading(true);
+            const result = await dispatch(signupUser(userData));
+            if (result.payload?.success) {
+                toast.success(result.payload.message);
+                dispatch(closeForms());
+            } else {
+                toast.error(result.payload.message);
+            }
+
+        } catch (error) {
+            toast.error("An unexpected error occurred");
+        } finally {
+            setLoading(false);
+        }
     }
 
 
@@ -75,7 +64,7 @@ export default function Signup() {
             <form onSubmit={handleSignup} className="login-form">
                 <div className="form-title">
                     <h2>Sign up</h2>
-                    <p onClick={handleShowSignupForm}><i className="fa-solid fa-xmark"></i></p>
+                    <p onClick={() => dispatch(closeForms())}><i className="fa-solid fa-xmark"></i></p>
                 </div>
                 <div className="form-input">
                     <input type="text" name="username" value={formData.username} onChange={handleFormData} placeholder="name" required />
