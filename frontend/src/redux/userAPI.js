@@ -9,7 +9,6 @@ export const getUserAPI = async () => {
         },
     });
     const data = await response.json();
-    console.log("user api data ", data);
     return data;
 }
 export const signupAPI = async (userData) => {

@@ -5,7 +5,6 @@ import { signupAPI, loginAPI, logoutAPI, getUserAPI } from "./userAPI";
 export const getUser = createAsyncThunk("user/getUser", async (_, { rejectWithValue }) => {
     try {
         const response = await getUserAPI(); 
-        console.log("get user res ",  response.user);
         return response.user;
     } catch (error) {
         console.log("Error fetching user:", error); 

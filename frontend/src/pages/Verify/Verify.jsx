@@ -12,7 +12,7 @@ export default function Verify(){
     const navigate = useNavigate();
 
     const verifyPayment = async () =>{
-        const res = await axios.post(`${backendUrl}/order/verify`, {success, orderId});
+        const res = await axios.post(`${backendUrl}/order/verify`, {success, orderId}, { withCredentials: true });
         if(res.data.success){
             navigate("/myorders");
         }else{
