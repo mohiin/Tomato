@@ -175,8 +175,8 @@ const searchFood = async (req, res) => {
     try {
         const searchQuery = {
             "$or": [
-                { "name": { $regex: foodname, $options: 'i' } },
-                { "category": { $regex: foodname, $options: 'i' } },
+                { name: { $regex: foodname, $options: 'i' } },
+                { category: { $regex: foodname, $options: 'i' } },
             ]
         };
 
